@@ -1,0 +1,23 @@
+.formContainer {
+  width: 100%;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  margin-bottom: 4em;
+}
+
+.formInput {
+  width: 100%;
+  max-width: 32em;
+  padding: 1em;
+  border-radius: 1em;
+}
+
+.formButton {
+  padding: 1em 3em;
+  border-radius: 1em;
+  cursor: pointer;
+}
