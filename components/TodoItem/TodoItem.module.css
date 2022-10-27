@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  border: 1px solid #B0B2B5;
+  border: none;
   padding: 1em;
   border-radius: 1em;
   display: flex;
@@ -32,9 +32,10 @@
 
 .item input {
   width: 100%;
-  padding: 0.6em;
+  padding: 0.8em;
   border-radius: 0.6em;
   background: #B0B2B5;
+  border: none;
   font-size: 1rem;
   color: #161609;
 }

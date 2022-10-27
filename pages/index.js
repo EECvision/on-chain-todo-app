@@ -82,9 +82,15 @@ export default function Home() {
     let newItems;
     switch (action) {
       case "create":
-        newItems = todoItems.map((todoItem) =>
-          todoItem.itemId !== itemId ? todoItem : { itemId: itemId, item }
-        );
+        const isItem = todoItems.find((todoItem) => todoItem.itemId === itemId);
+        if (isItem) {
+          newItems = todoItems.map((todoItem) =>
+            todoItem.itemId !== itemId ? todoItem : { itemId: itemId, item }
+          );
+        } else {
+          newItems = [...todoItems, { itemId: itemId, item }];
+        }
+
         setTodoItems(newItems);
         break;
       case "delete":
