@@ -139,7 +139,10 @@ export default function Home() {
             <div>
               Please switch your account to any of our supported networks.{" "}
             </div>
-            <div onClick={async () => switchChain(80001)}>
+            <div
+              className={classes.hintLink}
+              onClick={async () => switchChain(80001)}
+            >
               {SUPPORTED_NETWORKS[80001]}
             </div>
           </div>
