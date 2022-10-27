@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./TodoItem.module.css";
 import { ethers } from "ethers";
 import { initWrite, listenForTransactionMine } from "../../utils";
 import { abi, contractAddress } from "../../constants";
 import { useMoralis } from "react-moralis";
 
-const TodoItem = ({ item: { itemId, item } }) => {
+const TodoItem = ({ todoItem, setUpdateUi }) => {
+  const { itemId, item } = todoItem;
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState(item);
-  const [cache] = useState(item);
+  const [cache, setCache] = useState(item);
 
   const { chainId } = useMoralis();
   const todoAddress =
@@ -24,8 +25,8 @@ const TodoItem = ({ item: { itemId, item } }) => {
     if (contract) {
       try {
         const txResponse = await contract.updateItem(itemId, value);
-        const res = await listenForTransactionMine(txResponse, provider);
-        console.log(res);
+        await listenForTransactionMine(txResponse, provider);
+        setUpdateUi(true);
         handleClose();
       } catch (error) {
         console.log(error);
@@ -40,10 +41,9 @@ const TodoItem = ({ item: { itemId, item } }) => {
     const contract = await initWrite(todoAddress, abi);
     if (contract) {
       try {
-        console.log("itemToDelete", { itemId });
         const txResponse = await contract.deleteItem(itemId);
-        const res = await listenForTransactionMine(txResponse, provider);
-        console.log(res);
+        await listenForTransactionMine(txResponse, provider);
+        setUpdateUi(true);
         handleClose();
       } catch (error) {
         console.log(error);
@@ -69,9 +69,14 @@ const TodoItem = ({ item: { itemId, item } }) => {
     setOpen(false);
   };
 
+  useEffect(() => {
+    setCache(item);
+    setValue(item);
+  }, [todoItem]);
+
   return (
     <div className={classes.container}>
-      {loading ? <div className={classes.loader}>loading...</div> : null}
+      {loading ? <div className={classes.loader}>Loading...</div> : null}
       <div className={classes.item}>
         <input
           onClick={handleOpen}
@@ -80,14 +85,18 @@ const TodoItem = ({ item: { itemId, item } }) => {
           onChange={handleChange}
           disabled={!open}
         />
-        <div onClick={handleCancel} className={classes.arrow}>
-          v
-        </div>
+        <button onClick={handleCancel} className={classes.arrow}>
+          {open ? "-" : "+"}
+        </button>
       </div>
       {open ? (
         <div className={classes.editContainer}>
-          <button onClick={handleUpdate}>Update</button>
-          <button onClick={handleDelete}>Delete</button>
+          <button className={classes.update} onClick={handleUpdate}>
+            Update
+          </button>
+          <button className={classes.delete} onClick={handleDelete}>
+            Delete
+          </button>
         </div>
       ) : null}
     </div>

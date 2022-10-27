@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  border: 1px solid red;
+  border: 1px solid #B0B2B5;
   padding: 1em;
   border-radius: 1em;
   display: flex;
@@ -18,12 +18,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(245, 245, 245, 0.72);
+  background: rgba(245, 245, 245, 0.6);
+  color: #FFF100;
 }
 
 .item {
   width: 100%;
-  border-radius: 1em;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -32,12 +32,18 @@
 
 .item input {
   width: 100%;
-  padding: 1em;
-  border-radius: 1em;
+  padding: 0.6em;
+  border-radius: 0.6em;
+  background: #B0B2B5;
+  font-size: 1rem;
+  color: #161609;
+}
+
+.item input:focus {
+  background: #FFFFFF;
 }
 
 .editContainer {
-  border: 1px solid red;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -48,14 +54,30 @@
 
 .editContainer button {
   cursor: pointer;
+  font-weight: 600;
+  border-radius: 0.4em;
+  padding: 0.6em;
+}
+
+.update {
+  background: #FFF100;
+  color: #161609;
+}
+
+.delete {
+  background: #B0B2B5;
+  color: #FFFFFF;
 }
 
 .arrow {
-  border: 1px solid red;
   cursor: pointer;
   width: 2em;
-  height: 2em;
+  height: 1.4em;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #FFF100;
+  color: #161609;
+  border-radius: 0.2em;
+  font-size: 1.2rem;
 }

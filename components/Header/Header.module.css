@@ -1,5 +1,5 @@
 .container {
-  border: 1px solid red;
+  border-bottom: 1px solid #B0B2B5;
   width: 100%;
   padding: 1em 2em;
   margin: 0 auto;
@@ -7,4 +7,9 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 4em;
+}
+
+.logo {
+  font-weight: bold;
+  color: #FFFFFF;
 }

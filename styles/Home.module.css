@@ -1,5 +1,4 @@
 .container {
-  border: 1px solid red;
   width: 100%;
   display: flex;
   align-items: center;
@@ -10,15 +9,36 @@
 }
 
 .todoItems {
-  border: 1px solid red;
+  border: 1px solid #B0B2B5;
   width: 100%;
-  height: 20em;
-  overflow: auto;
-  max-width: 32em;
+  max-width: 48em;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   gap: 2em;
-  padding: 1em;
+  padding: 2em;
+  border-radius: 1em;
+}
+
+.alert * {
+  color: #B0B2B5 !important;
+}
+
+.hint_1 {
+  color: #FFF100;
+}
+
+.hint_2 {
+  color: #B0B2B5;
+}
+
+.hint_3 {
+  color: #B0B2B5;
+  font-size: 1.2rem;
+}
+
+.hint_1 a {
+  text-decoration: underline;
+  margin-left: 8px;
 }

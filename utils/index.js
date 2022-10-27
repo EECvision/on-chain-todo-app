@@ -1,4 +1,8 @@
 import { ethers } from "ethers";
+// import { switchChain } from "./chainConnect";
+const SUPPORTED_NETWORKS = {
+  80001: "Polygon Mumbai",
+};
 
 export const initWrite = async (contractAddress, abi) => {
   if (typeof window.ethereum !== undefined) {
@@ -28,4 +32,11 @@ export const listenForTransactionMine = (txResponse, provider) => {
       resolve(`Completed with ${txReceipt.confirmations} confirmations`);
     });
   });
+};
+
+export const getNetwork = async (chainId) => {
+  if (!(chainId in SUPPORTED_NETWORKS)) {
+    return false;
+  }
+  return true;
 };

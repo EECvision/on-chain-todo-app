@@ -5,9 +5,9 @@ import { abi, contractAddress } from "../../constants";
 import { useMoralis } from "react-moralis";
 import { ethers } from "ethers";
 
-const TodoInput = () => {
+const TodoInput = ({ setUpdateUi }) => {
   const [value, setValue] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(0);
 
   const { chainId } = useMoralis();
   const todoAddress =
@@ -17,19 +17,20 @@ const TodoInput = () => {
 
   const createItem = async () => {
     if (!value) return;
-    setLoading(true);
+    setLoading(1);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const contract = await initWrite(todoAddress, abi);
     if (contract) {
       try {
         const txResponse = await contract.createItem(value);
-        const res = await listenForTransactionMine(txResponse, provider);
-        console.log(res);
+        setLoading(2);
+        await listenForTransactionMine(txResponse, provider);
         setValue("");
-        setLoading(false);
+        setLoading(0);
+        setUpdateUi(true);
       } catch (error) {
         console.log(error);
-        setLoading(false);
+        setLoading(0);
       }
     }
   };
@@ -51,9 +52,14 @@ const TodoInput = () => {
         onChange={handleChange}
         placeholder="start here..."
         className={classes.formInput}
+        disabled={loading}
       />
       <button disabled={loading} type="submit" className={classes.formButton}>
-        {loading ? "Submit..." : "Submit"}
+        {loading === 0
+          ? "Submit"
+          : loading === 1
+          ? "Submit..."
+          : "Processing..."}
       </button>
     </form>
   );
